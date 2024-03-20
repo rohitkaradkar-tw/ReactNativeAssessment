@@ -1,0 +1,1 @@
+// This app will have 4 bottom tabs (Home, Wishlist, Cart, Settings). And will show me the title of the page whenever I navigate to it. 
