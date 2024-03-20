@@ -13,7 +13,7 @@ export default function InputNameScreen({route, navigation}: {route: any, naviga
   const [name, setName] = useState("");
   const storeUserName = async (value: string) => {
     try {
-      await AsyncStorage.setItem('name', name);
+      await AsyncStorage.setItem('username', name);
     } catch (e) {
       console.log("Error storing username: " + e);
     }
@@ -25,20 +25,9 @@ export default function InputNameScreen({route, navigation}: {route: any, naviga
     else {
       console.log(name);
       storeUserName(name);
-      navigation.navigate('Welcome', { username: name });
+      navigation.push('Welcome', { username: name });
     }
   }
-
-  const getName = async () => AsyncStorage.getItem('name');
-
-  useEffect(() => {
-    getName().then((value) => {
-      if (value !== null) {
-        console.log('Name already exists: ' + value + ' navigating to Welcome');
-        navigation.navigate('Welcome', { username: name });
-      }
-    });
-  });
 
   return (
     <View style={{ justifyContent: 'center', height: '100%', padding: 10 }}>
