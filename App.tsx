@@ -1,22 +1,24 @@
-import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import InputName from './src/features/welcome/InputName'
+import InputNameScreen from './src/features/welcome/InputNameScreen'
 import { NavigationContainer } from '@react-navigation/native'
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Welcome from './src/features/welcome/Welcome';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import WelcomeScreen from './src/features/welcome/WelcomeScreen';
 
-const Stack = createNativeStackNavigator();
+type RootStackParamList = {
+  InputName: undefined,
+  Welcome: { username: string }
+}
+
+const RootStack = createNativeStackNavigator<RootStackParamList>();
 
 export default function App() {
   return (
-    <NavigationContainer> 
-      <Stack.Navigator>
-        <Stack.Screen name='InputName' component={InputName}/>
-        <Stack.Screen name='Welcome' component={Welcome}/>
-      </Stack.Navigator>
-     
+    <NavigationContainer>
+      <RootStack.Navigator>
+        <RootStack.Screen name='InputName' component={InputNameScreen} />
+        <RootStack.Screen name='Welcome' component={WelcomeScreen} />
+      </RootStack.Navigator>
     </NavigationContainer>
   )
 }
-
-const styles = StyleSheet.create({})
+export type { RootStackParamList }

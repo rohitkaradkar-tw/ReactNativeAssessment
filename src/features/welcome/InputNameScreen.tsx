@@ -1,12 +1,15 @@
 import { Button, StyleSheet, Text, TextInput, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import Welcome from './Welcome';
+import WelcomeScreen from './WelcomeScreen';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import type { RootStackParamList } from '../../../App';
 
+type Props = NativeStackNavigationProp<RootStackParamList, 'InputName'>;
 
-export default function InputName() {
-  const navigation = useNavigation();
+export default function InputNameScreen({route, navigation}: {route: any, navigation: Props}) {
+  // const navigation = useNavigation();
   const [name, setName] = useState("");
   const storeUserName = async (value: string) => {
     try {
@@ -22,7 +25,7 @@ export default function InputName() {
     else {
       console.log(name);
       storeUserName(name);
-      navigation.navigate('Welcome');
+      navigation.navigate('Welcome', { username: name });
     }
   }
 
@@ -31,8 +34,8 @@ export default function InputName() {
   useEffect(() => {
     getName().then((value) => {
       if (value !== null) {
-        console.log('Name already exists: ' + value + ' navigating to Welcome'); 
-        navigation.navigate('Welcome');
+        console.log('Name already exists: ' + value + ' navigating to Welcome');
+        navigation.navigate('Welcome', { username: name });
       }
     });
   });
