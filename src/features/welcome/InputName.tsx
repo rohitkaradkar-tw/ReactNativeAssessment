@@ -1,5 +1,6 @@
 import { Button, StyleSheet, Text, TextInput, View } from 'react-native'
 import React, { useState } from 'react'
+import Welcome from './Welcome';
 
 
 export default function InputName() {
@@ -24,7 +25,7 @@ export default function InputName() {
       placeholder='Enter your name..'
       />
       <View  style={styles.buttonStyles}>
-      <Button title='submit' onPress={handleClick}/>
+      <Button title='submit' />
       </View>
     </View>
   )
