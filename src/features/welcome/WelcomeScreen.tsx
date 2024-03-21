@@ -1,8 +1,6 @@
 // The app asks for my name when I open it for first time, remembers it and shows “Hey <my_name>” when I close and open it afterwards
 import { Button, StyleSheet, Text, View } from 'react-native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
 import type { RootStackParamList } from '../../../App';
 
 type Props = NativeStackNavigationProp<RootStackParamList, 'Welcome'>;

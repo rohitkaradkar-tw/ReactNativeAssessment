@@ -12,7 +12,7 @@ type RootStackParamList = {
   InputName: undefined,
   Welcome: { username: string },
   Loading: undefined,
-  Main:undefined
+  Main:undefined,
 }
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
@@ -43,9 +43,9 @@ export default function App() {
                 <RootStack.Screen name='InitialInputName' component={InputNameScreen} />
                 <RootStack.Screen name='Welcome' component={WelcomeScreen} />
               </>
-              : <RootStack.Screen name='Welcome' component={WelcomeScreen} initialParams={{ username: state.userName }} />
+              : <RootStack.Screen name='Welcome' component={WelcomeScreen} initialParams={{ username: state.userName }} options={{title:'Welcome to Amazon'}}/>
           }
-          <RootStack.Screen name='Main' component={Main} />
+          <RootStack.Screen name='Main' component={Main} options={{title:'Amazon'}} />
           <RootStack.Screen name='InputName' component={InputNameScreen} />
         </>
       </RootStack.Navigator>
