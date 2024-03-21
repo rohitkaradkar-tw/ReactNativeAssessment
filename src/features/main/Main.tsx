@@ -7,6 +7,7 @@ import Settings from './settings/Settings';
 import WishList from './wishlist/WishList';
 import Cart from './cart/Cart';
 
+
 const Tab = createBottomTabNavigator();
 
 const MainScreen = () => {
