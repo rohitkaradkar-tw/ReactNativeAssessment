@@ -1,5 +1,5 @@
 import { Button, StyleSheet, Text, TextInput, View } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import WelcomeScreen from './WelcomeScreen';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -9,7 +9,6 @@ import type { RootStackParamList } from '../../../App';
 type Props = NativeStackNavigationProp<RootStackParamList, 'InputName'>;
 
 export default function InputNameScreen({route, navigation}: {route: any, navigation: Props}) {
-  // const navigation = useNavigation();
   const [name, setName] = useState("");
   const storeUserName = async (value: string) => {
     try {
@@ -25,7 +24,7 @@ export default function InputNameScreen({route, navigation}: {route: any, naviga
     else {
       console.log(name);
       storeUserName(name);
-      navigation.push('Welcome', { username: name });
+      navigation.replace('Welcome', { username: name });
     }
   }
 
