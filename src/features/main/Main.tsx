@@ -2,18 +2,24 @@
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Home from './Home';
-import Settings from './Settings';
-import WishList from './WishList';
-import Cart from './Cart';
-import { Image } from 'react-native';
+import Home from './home/Home';
+import Settings from './settings/Settings';
+import WishList from './wishlist/WishList';
+import Cart from './cart/Cart';
+
 
 const Tab = createBottomTabNavigator();
 
 const MainScreen = () => {
     return (
         <NavigationContainer independent={true}>
-            <Tab.Navigator>
+            <Tab.Navigator
+            initialRouteName="Home" 
+            screenOptions={{
+                tabBarActiveTintColor:'purple',
+                tabBarShowLabel:true,
+            }}
+            >
                 <Tab.Screen name="Home" component={Home} options={{title:'Home'}} />
                 <Tab.Screen name="Wishlist" component={WishList} options={{title:'Wishlist'}}/>
                 <Tab.Screen name='Cart' component={Cart} options={{title:'Cart'}}/>
