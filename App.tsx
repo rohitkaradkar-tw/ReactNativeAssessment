@@ -5,11 +5,14 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import WelcomeScreen from './src/features/welcome/WelcomeScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import LoadingScreen from './src/component/LoadingScreen';
+import Main from './src/features/main/Main';
 
 type RootStackParamList = {
+  InitialInputName:undefined,
   InputName: undefined,
   Welcome: { username: string },
-  Loading: undefined
+  Loading: undefined,
+  Main:undefined
 }
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
@@ -37,11 +40,13 @@ export default function App() {
           {
             state.userName == ''
               ? <>
-                <RootStack.Screen name='InputName' component={InputNameScreen} />
+                <RootStack.Screen name='InitialInputName' component={InputNameScreen} />
                 <RootStack.Screen name='Welcome' component={WelcomeScreen} />
               </>
               : <RootStack.Screen name='Welcome' component={WelcomeScreen} initialParams={{ username: state.userName }} />
           }
+          <RootStack.Screen name='Main' component={Main} />
+          <RootStack.Screen name='InputName' component={InputNameScreen} />
         </>
       </RootStack.Navigator>
     </NavigationContainer>
