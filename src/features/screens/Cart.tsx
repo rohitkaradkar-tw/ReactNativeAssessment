@@ -11,9 +11,9 @@ const Cart = () => {
     <Screen>
       <FlatList
         data={getCartList()}
-        renderItem={cartListEntry => 
+        renderItem={cartListEntry => (
           <CompactCard product={cartListEntry.item} />
-        }
+        )}
         keyExtractor={item => item.id.toString()}
         contentContainerStyle={styles.container}
         style={styles.list}
