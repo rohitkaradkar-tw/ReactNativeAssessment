@@ -1,3 +1,4 @@
+
 import { StyleSheet, Text, View , ActivityIndicator,Image, ScrollView} from 'react-native'
 import { useEffect ,useState} from 'react' ;
 import React from 'react'
@@ -42,6 +43,7 @@ export default function Home() {
     )
   };
 
+
   const getActivity=()=>{
     if(loading){
     return <ActivityIndicator size={'large'} />
@@ -50,7 +52,6 @@ export default function Home() {
       return<Text>Error ocuured while calling Api : {error}</Text>
     }
     console.log(response)
-
     return(
       <View>
         {displayProducts()}
