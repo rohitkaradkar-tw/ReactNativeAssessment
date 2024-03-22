@@ -3,11 +3,14 @@ import { StyleSheet, Text, View , ActivityIndicator,Image, ScrollView} from 'rea
 import { useEffect ,useState} from 'react' ;
 import React from 'react'
 import { fetchProducts } from '../../../service/ProductsService';
+import { useTheme } from '@react-navigation/native';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 export default function Home() {
   const [loading,setLoading]=useState(true);
   const [response,setResponse]=useState<any>([]);
   const [error,setError]=useState();
+  const {colors} =useTheme();
 
   useEffect(()=>{
     fetchProducts()
@@ -33,9 +36,9 @@ export default function Home() {
           source={{ uri: product.image }}
           style={{ width: 200, height: 200, marginBottom: 10 }}
         />
-        <Text style={{ fontSize: 18, fontWeight: 'bold' }}>{product.title}</Text>
-        <Text>Price: ${product.price}</Text>
-        <Text>ratings : {product.rating.rate}</Text>
+        <Text style={{ fontSize: 18, fontWeight: 'bold',color:colors.text }}>{product.title}</Text>
+        <Text style={{color:colors.text}}>Price: ${product.price}</Text>
+        <Text style={{color:colors.text}}>ratings : {product.rating.rate}</Text>
       </View>
     ))}
     </ScrollView>
