@@ -59,13 +59,13 @@ export default function App() {
             {
               state.userName == ''
                 ? <>
-                  <RootStack.Screen name='InitialInputName' component={InputNameScreen} />
+                  <RootStack.Screen name='InitialInputName' component={InputNameScreen} options={{ title: 'Login' }} />
                   <RootStack.Screen name='Welcome' component={WelcomeScreen} />
                 </>
                 : <RootStack.Screen name='Welcome' component={WelcomeScreen} initialParams={{ username: state.userName }} options={{ title: 'Welcome to Amazon' }} />
             }
             <RootStack.Screen name='Main' component={Main} options={{ title: 'Amazon' }} />
-            <RootStack.Screen name='InputName' component={InputNameScreen} />
+            <RootStack.Screen name='InputName' component={InputNameScreen} options={{ title: 'Edit Name' }}/>
           </>
         </RootStack.Navigator>
       </NavigationContainer>
