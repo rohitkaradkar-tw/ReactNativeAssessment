@@ -34,7 +34,6 @@ export default function Home() {
           style={{ width: 200, height: 200, marginBottom: 10 }}
         />
         <Text style={{ fontSize: 18, fontWeight: 'bold' }}>{product.title}</Text>
-        {/* <Text>{product.description}</Text> */}
         <Text>Price: ${product.price}</Text>
         <Text>ratings : {product.rating.rate}</Text>
       </View>
