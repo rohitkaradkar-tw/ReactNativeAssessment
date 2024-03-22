@@ -2,10 +2,10 @@
 import * as React from 'react';
 import { DarkTheme, DefaultTheme, NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Home from './Home';
-import Settings from './Settings';
-import WishList from './WishList';
-import Cart from './Cart';
+import Home from './home/Home';
+import WishList from './wishlist/WishList';
+import Cart from './cart/Cart';
+import Settings from './settings/Settings';
 import { ThemeModeContext } from '../../../App';
 
 const Tab = createBottomTabNavigator();

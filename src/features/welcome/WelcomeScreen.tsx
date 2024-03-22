@@ -2,11 +2,13 @@
 import { Button, StyleSheet, Text, View } from 'react-native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import type { RootStackParamList } from '../../../App';
+import { useTheme } from '@react-navigation/native';
 
 type Props = NativeStackNavigationProp<RootStackParamList, 'Welcome'>;
 
 export default function WelcomeScreen({ route,navigation }: { route: { params: { username: string } },navigation:Props }) {
-  
+    const {colors}=useTheme();
+
     const handleHome=()=>{
         console.log("Main Tab")
         navigation.push('Main');
@@ -18,7 +20,7 @@ export default function WelcomeScreen({ route,navigation }: { route: { params: {
     return (
         // center the text
         <View style={{ justifyContent: 'center', alignItems: 'center', height: '100%'}}>
-            <Text style={{fontWeight:'bold',fontSize:30}}>Hey {route.params.username}</Text>
+            <Text style={{fontWeight:'bold',fontSize:30,color:colors.text}}>Hey {route.params.username}</Text>
             <View style={styles.homeButton}>
                 <Button title="Go To Home" onPress={handleHome}/>
             </View>
