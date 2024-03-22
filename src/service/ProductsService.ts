@@ -5,8 +5,7 @@ export async function fetchProducts() {
       throw new Error('Network response was not ok.');
     }
     return await response.json();
-  } catch (error:any) {
+  } catch (error: any) {
     throw new Error(`Error fetching products: ${error.message}`);
   }
 }
-  
