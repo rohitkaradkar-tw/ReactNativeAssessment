@@ -1,9 +1,8 @@
-import React, { useEffect, useState, createContext } from 'react';
-
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, { createContext, useEffect, useState } from 'react';
+import { DarkTheme, DefaultTheme } from '@react-navigation/native';
+import { getUserName } from './src/service/UserNameService';
 import LoadingScreen from './src/component/LoadingScreen';
 import Navigation from './src/component/Navigation';
-import { DarkTheme, DefaultTheme } from '@react-navigation/native';
 
 export type ThemeMode = 'light' | 'dark' | 'auto';
 
@@ -17,14 +16,14 @@ export const ThemeModeContext = createContext<ThemeModeContextProps>({
   setThemeMode: () => {}
 });
 
-export default function App() {
+const App = () => {
   const [state, setState] = useState({ isLoading: true, userName: '' });
   const [themeMode, setThemeMode] = useState<ThemeMode>('dark');
 
   useEffect(() => {
-    const getUsername = async () => await AsyncStorage.getItem('username');
+    const getUsername = getUserName('username');
 
-    getUsername().then(username => {
+    getUsername.then(username => {
       setState({ isLoading: false, userName: username || '' });
     });
   });
@@ -47,4 +46,6 @@ export default function App() {
       </ThemeModeContext.Provider>
     </>
   );
-}
+};
+
+export default App;

@@ -1,7 +1,7 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
 import { Button, StyleSheet, TextInput, View } from 'react-native';
+import { setUserName } from '../../service/UserNameService';
 import type { RootStackParamList } from '../../component/Navigation';
 
 type Props = NativeStackNavigationProp<RootStackParamList, 'InputName'>;
@@ -13,19 +13,11 @@ export default function InputNameScreen({
   navigation: Props;
 }) {
   const [name, setName] = useState('');
-  const storeUserName = async (value: string) => {
-    try {
-      await AsyncStorage.setItem('username', value);
-    } catch (e) {
-      console.log('Error storing username: ' + e);
-    }
-  };
+
   const handleClick = () => {
-    if (name === '') {
-      console.log('Empty');
-    } else {
+    if (name) {
       console.log(name);
-      storeUserName(name);
+      setUserName(name);
       navigation.replace('Welcome', { username: name });
     }
   };
