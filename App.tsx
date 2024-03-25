@@ -1,23 +1,9 @@
-import React, { createContext, useEffect } from 'react';
-import InputNameScreen from './src/features/welcome/InputNameScreen';
-import {
-  DarkTheme,
-  DefaultTheme,
-  NavigationContainer
-} from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import WelcomeScreen from './src/features/welcome/WelcomeScreen';
+import React, { useEffect, useState, createContext } from 'react';
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import LoadingScreen from './src/component/LoadingScreen';
-import Main from './src/features/main/Main';
-
-type RootStackParamList = {
-  InitialInputName: undefined;
-  InputName: undefined;
-  Welcome: { username: string };
-  Loading: undefined;
-  Main: undefined;
-};
+import Navigation from './src/component/Navigation';
+import { DarkTheme, DefaultTheme } from '@react-navigation/native';
 
 export type ThemeMode = 'light' | 'dark' | 'auto';
 
@@ -31,11 +17,9 @@ export const ThemeModeContext = createContext<ThemeModeContextProps>({
   setThemeMode: () => {}
 });
 
-export const RootStack = createNativeStackNavigator<RootStackParamList>();
-
 export default function App() {
-  const [state, setState] = React.useState({ isLoading: true, userName: '' });
-  const [themeMode, setThemeMode] = React.useState<ThemeMode>('dark');
+  const [state, setState] = useState({ isLoading: true, userName: '' });
+  const [themeMode, setThemeMode] = useState<ThemeMode>('dark');
 
   useEffect(() => {
     const getUsername = async () => await AsyncStorage.getItem('username');
@@ -56,42 +40,11 @@ export default function App() {
     );
   }
   return (
-    <ThemeModeContext.Provider
-      value={{ themeMode: themeMode, setThemeMode: setThemeMode }}>
-      <NavigationContainer theme={themeData}>
-        <RootStack.Navigator>
-          <>
-            {state.userName == '' ? (
-              <>
-                <RootStack.Screen
-                  name="InitialInputName"
-                  component={InputNameScreen}
-                  options={{ title: 'Login' }}
-                />
-                <RootStack.Screen name="Welcome" component={WelcomeScreen} />
-              </>
-            ) : (
-              <RootStack.Screen
-                name="Welcome"
-                component={WelcomeScreen}
-                initialParams={{ username: state.userName }}
-                options={{ title: 'Welcome to Amazon' }}
-              />
-            )}
-            <RootStack.Screen
-              name="Main"
-              component={Main}
-              options={{ title: 'Amazon' }}
-            />
-            <RootStack.Screen
-              name="InputName"
-              component={InputNameScreen}
-              options={{ title: 'Edit Name' }}
-            />
-          </>
-        </RootStack.Navigator>
-      </NavigationContainer>
-    </ThemeModeContext.Provider>
+    <>
+      <ThemeModeContext.Provider
+        value={{ themeMode: themeMode, setThemeMode: setThemeMode }}>
+        <Navigation theme={themeData} state={state} />
+      </ThemeModeContext.Provider>
+    </>
   );
 }
-export type { RootStackParamList };
