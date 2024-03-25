@@ -2,7 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
 import { Button, StyleSheet, TextInput, View } from 'react-native';
-import type { RootStackParamList } from '../../../App';
+import type { RootStackParamList } from '../../component/Navigation';
 
 type Props = NativeStackNavigationProp<RootStackParamList, 'InputName'>;
 
