@@ -1,48 +1,47 @@
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
-import { Button, StyleSheet, TextInput, View } from 'react-native';
-import { setUserName } from '../../service/UserNameService';
-import type { RootStackParamList } from '../../component/RootNavigation';
+import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+import { StackScreens } from '../../navigation/Screens';
 
-type Props = NativeStackNavigationProp<RootStackParamList, 'InputName'>;
-
-export default function InputNameScreen({
-  navigation
-}: {
-  route: any;
-  navigation: Props;
-}) {
+export const InputNameScreen = ({ navigation }: any) => {
   const [name, setName] = useState('');
 
-  const handleClick = () => {
-    if (name) {
-      console.log(name);
-      setUserName(name);
-      navigation.replace('Welcome', { username: name });
+  // TODO : if already name exist navigate to content
+
+  const handleSubmit = () => {
+    if (name.length >= 3) {
+      // TODO : save name it somewhere
+      navigation.navigate(StackScreens.CONTENT);
     }
   };
 
   return (
-    <View style={{ justifyContent: 'center', height: '100%', padding: 10 }}>
+    <View style={styles.screen}>
       <TextInput
-        style={{
-          height: 50,
-          borderWidth: 2,
-          borderColor: 'grey'
-        }}
-        onChangeText={v => {
-          setName(v);
-        }}
-        placeholder="Enter your name.."
+        style={styles.textInput}
+        onChangeText={setName}
+        placeholder="How should we call you ...?"
       />
-      <View style={styles.buttonStyles}>
-        <Button title="submit" onPress={handleClick} />
-      </View>
+
+      <Pressable onPress={handleSubmit}>
+        <View style={styles.buttonStyles}>
+          <Text>Submit</Text>
+        </View>
+      </Pressable>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
+  screen: {
+    justifyContent: 'center',
+    height: '100%',
+    padding: 10
+  },
+  textInput: {
+    height: 50,
+    borderWidth: 2,
+    borderColor: 'grey'
+  },
   buttonStyles: {
     alignItems: 'center',
     marginTop: 4
