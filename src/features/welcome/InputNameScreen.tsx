@@ -2,7 +2,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
 import { Button, StyleSheet, TextInput, View } from 'react-native';
 import { setUserName } from '../../service/UserNameService';
-import type { RootStackParamList } from '../../component/Navigation';
+import type { RootStackParamList } from '../../component/RootNavigation';
 
 type Props = NativeStackNavigationProp<RootStackParamList, 'InputName'>;
 
