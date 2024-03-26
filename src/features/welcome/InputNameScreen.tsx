@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 import { StackScreens } from '../../navigation/Screens';
+import { useTheme } from '@react-navigation/native';
 
 export const InputNameScreen = ({ navigation }: any) => {
   const [name, setName] = useState('');
-
+  const { colors } = useTheme();
   // TODO : if already name exist navigate to content
 
   const handleSubmit = () => {
@@ -17,14 +18,14 @@ export const InputNameScreen = ({ navigation }: any) => {
   return (
     <View style={styles.screen}>
       <TextInput
-        style={styles.textInput}
+        style={[styles.textInput, { color: colors.text }]}
         onChangeText={setName}
         placeholder="How should we call you ...?"
       />
 
       <Pressable onPress={handleSubmit}>
         <View style={styles.buttonStyles}>
-          <Text>Submit</Text>
+          <Text style={[{ color: colors.text }]}>Submit</Text>
         </View>
       </Pressable>
     </View>

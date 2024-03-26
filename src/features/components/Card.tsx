@@ -7,21 +7,56 @@ export const Card = ({ product }: { product: ProductType }) => {
   const { colors } = useTheme();
 
   return (
-    <View style={styles.card}>
-      <Image source={{ uri: product.image }} style={styles.image} />
-      <Text style={[styles.title, { color: colors.text }]}>
-        {product.title}
-      </Text>
-      <Text style={{ color: colors.text }}>Price: ₹{product.price}</Text>
-      <Text style={{ color: colors.text }}>
-        ratings : {product.rating.rate}
-      </Text>
+    <View style={[styles.card, { backgroundColor: colors.card }]}>
+      <View style={styles.imgBox}>
+        <Image
+          source={{ uri: product.image }}
+          style={styles.image}
+          resizeMode="contain"
+        />
+      </View>
+      <View style={styles.titleBox}>
+        <Text
+          style={[styles.title, { color: colors.text }]}
+          ellipsizeMode="tail"
+          numberOfLines={2}>
+          {product.title}
+        </Text>
+      </View>
+      <View style={styles.metaData}>
+        <Text style={{ color: colors.text }}>Price: ₹ {product.price}</Text>
+        <Text style={{ color: colors.text }}>
+          ratings : {product.rating.rate}
+        </Text>
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  card: { margin: 20, width: 200, height: 250 },
-  image: { width: 200, height: 200 },
-  title: { fontSize: 18, fontWeight: 'bold' }
+  card: {
+    padding: 15,
+    width: 180,
+    borderRadius: 20,
+    gap: 10
+  },
+  imgBox: {
+    alignItems: 'center',
+    width: '100%'
+  },
+  titleBox: {
+    height: 40
+  },
+  image: {
+    aspectRatio: 1,
+    width: '100%'
+  },
+  title: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    textAlign: 'center'
+  },
+  metaData: {
+    alignItems: 'center'
+  }
 });

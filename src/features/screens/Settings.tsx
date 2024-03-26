@@ -1,35 +1,27 @@
-import { Button, Text, View } from 'react-native';
-import React, { useContext } from 'react';
-
+import React from 'react';
+import { Pressable, StyleSheet, Switch, Text, View } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 
+import { useThemeContext } from '../../theme/AppTheme';
+
 export default function Settings() {
-  const colorThemeContext = useContext(ThemeModeContext);
+  const { toggleTheme } = useThemeContext();
   const { colors } = useTheme();
 
   return (
-    <View
-      style={{
-        height: '100%',
-        backgroundColor: colors.background,
-        justifyContent: 'center',
-        padding: 24
-      }}>
-      <Text style={{ color: colors.text }}>Change Theme:</Text>
-      <Button
-        title="Set Light Mode"
-        onPress={() => {
-          colorThemeContext.setThemeMode('light');
-        }}
-      />
-      <View style={{ marginTop: 12 }}>
-        <Button
-          title="Set Dark Mode"
-          onPress={() => {
-            colorThemeContext.setThemeMode('dark');
-          }}
-        />
-      </View>
+    <View style={[styles.screen, { backgroundColor: colors.background }]}>
+      <Pressable onPress={toggleTheme}>
+        <Text style={{ color: colors.text }}>Change Theme</Text>
+      </Pressable>
+      <Switch onChange={toggleTheme} />
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  screen: {
+    height: '100%',
+    justifyContent: 'center',
+    padding: 24
+  }
+});
