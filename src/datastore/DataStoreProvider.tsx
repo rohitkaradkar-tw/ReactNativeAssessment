@@ -3,10 +3,10 @@ import { ProductType } from '../features/models/Product';
 import { fetchProducts } from '../service/ProductsService';
 
 interface DataStoreContextProps {
-  data?: ProductType[];
+  data: ProductType[];
 }
 
-const DataStoreContext = createContext<DataStoreContextProps>({});
+const DataStoreContext = createContext<DataStoreContextProps>({ data: [] });
 
 export const useStoreData = () => {
   const dataContext = useContext(DataStoreContext);

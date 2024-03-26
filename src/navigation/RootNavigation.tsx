@@ -14,7 +14,7 @@ export const RootNavigation = () => {
 
   return (
     <NavigationContainer theme={theme}>
-      <RootStack.Navigator>
+      <RootStack.Navigator screenOptions={{ headerShown: false }}>
         <RootStack.Screen
           name={StackScreens.WELCOME}
           component={InputNameScreen}
