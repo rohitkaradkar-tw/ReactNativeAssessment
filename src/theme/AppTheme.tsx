@@ -20,7 +20,7 @@ export const useThemeContext = () => {
   return themeContext;
 };
 
-const AppTheme = ({ children }: any) => {
+export const AppTheme = ({ children }: any) => {
   const [theme, setTheme] = useState<Theme>(DefaultTheme);
 
   const toggleTheme = () => {
@@ -38,5 +38,3 @@ const AppTheme = ({ children }: any) => {
     </ThemeModeContext.Provider>
   );
 };
-
-export default AppTheme;

@@ -2,7 +2,6 @@ import { Button, Text, View } from 'react-native';
 import React, { useContext } from 'react';
 
 import { useTheme } from '@react-navigation/native';
-import { ThemeModeContext } from '../../../../App';
 
 export default function Settings() {
   const colorThemeContext = useContext(ThemeModeContext);

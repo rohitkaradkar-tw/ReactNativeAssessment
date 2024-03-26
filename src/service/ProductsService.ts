@@ -1,11 +1,9 @@
-export async function fetchProducts() {
-  try {
-    const response = await fetch('https://fakestoreapi.com/products');
-    if (!response.ok) {
-      throw new Error('Network response was not ok.');
-    }
-    return await response.json();
-  } catch (error: any) {
-    throw new Error(`Error fetching products: ${error.message}`);
+const getProductsRoute = 'https://fakestoreapi.com/products';
+
+export const fetchProducts = async () => {
+  const response = await fetch(getProductsRoute);
+  if (!response.ok) {
+    throw new Error('Network response was not ok.');
   }
-}
+  return await response.json();
+};
