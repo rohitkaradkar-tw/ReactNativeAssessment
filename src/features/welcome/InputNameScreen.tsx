@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
-import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
-import { StackScreens } from '../../navigation/Screens';
 import { useTheme } from '@react-navigation/native';
+import React, { useState } from 'react';
+import { StyleSheet, TextInput, View } from 'react-native';
+
+import { StackScreens } from '../../navigation/Screens';
+import { Screen } from '../components/Screen';
 
 export const InputNameScreen = ({ navigation }: any) => {
   const [name, setName] = useState('');
@@ -16,35 +18,37 @@ export const InputNameScreen = ({ navigation }: any) => {
   };
 
   return (
-    <View style={styles.screen}>
-      <TextInput
-        style={[styles.textInput, { color: colors.text }]}
-        onChangeText={setName}
-        placeholder="How should we call you ...?"
-      />
-
-      <Pressable onPress={handleSubmit}>
-        <View style={styles.buttonStyles}>
-          <Text style={[{ color: colors.text }]}>Submit</Text>
-        </View>
-      </Pressable>
-    </View>
+    <Screen>
+      <View style={styles.container}>
+        <TextInput
+          style={[styles.textInput, { color: colors.text }]}
+          onChangeText={setName}
+          onSubmitEditing={handleSubmit}
+          placeholder="How should we call you ...?"
+        />
+      </View>
+    </Screen>
   );
 };
 
 const styles = StyleSheet.create({
-  screen: {
-    justifyContent: 'center',
-    height: '100%',
-    padding: 10
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    margin: 20,
+    gap: 15
   },
   textInput: {
-    height: 50,
-    borderWidth: 2,
-    borderColor: 'grey'
+    borderColor: 'grey',
+    borderBottomWidth: 1,
+    fontSize: 20,
+    padding: 15,
+    alignSelf: 'center'
   },
-  buttonStyles: {
-    alignItems: 'center',
-    marginTop: 4
+  button: {
+    borderColor: 'grey',
+    borderRadius: 100,
+    borderWidth: 1,
+    aspectRatio: 1
   }
 });

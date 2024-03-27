@@ -39,18 +39,17 @@ export const DataStoreProvider = ({ children }: any) => {
   const [cartListIDs, setCartListIDs] = useState<Set<number>>(new Set());
 
   // Wishlist related operations
-  const getWishList = () => data.filter(product => wishlistIDs.has(product.id));
   const isWishlisted = (productID: number) => wishlistIDs.has(productID);
+  const getWishList = () => data.filter(product => isWishlisted(product.id));
   const toggleWishStatus = (selectedID: number) => {
-    const wishlist = new Set<number>([...wishlistIDs]);
+    const wishlist = new Set(wishlistIDs.values());
 
-    if (wishlist.has(selectedID)) {
+    if (isWishlisted(selectedID)) {
       wishlist.delete(selectedID);
-      setWishListIDs(wishlist);
-      return;
+    } else {
+      wishlist.add(selectedID);
     }
 
-    wishlist.add(selectedID);
     setWishListIDs(wishlist);
   };
 
