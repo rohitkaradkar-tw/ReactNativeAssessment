@@ -1,11 +1,34 @@
 import React from 'react';
-import { Text } from 'react-native';
-import { Screen } from '../components/Screen';
 
-export default function WishList() {
+import { useStoreData } from '../../datastore/DataStoreProvider';
+import { Screen } from '../components/Screen';
+import { FlatList, StyleSheet } from 'react-native';
+import { CompactCard } from '../components/CompactCard';
+
+export const WishList = () => {
+  const { data } = useStoreData();
+
   return (
     <Screen>
-      <Text>WishList</Text>
+      <FlatList
+        data={data}
+        renderItem={wishlistEntry => (
+          <CompactCard product={wishlistEntry.item} />
+        )}
+        keyExtractor={item => item.id.toString()}
+        contentContainerStyle={styles.container}
+        style={styles.list}
+      />
     </Screen>
   );
-}
+};
+
+const styles = StyleSheet.create({
+  container: {
+    rowGap: 10,
+    margin: 20
+  },
+  list: {
+    width: '100%'
+  }
+});

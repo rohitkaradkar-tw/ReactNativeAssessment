@@ -4,7 +4,7 @@ import React from 'react';
 import { TabScreens } from './Screens';
 import Cart from '../features/screens/Cart';
 import { Home } from '../features/screens/Home';
-import WishList from '../features/screens/WishList';
+import { WishList } from '../features/screens/WishList';
 import Settings from '../features/screens/Settings';
 import {
   CartTabIcon,
