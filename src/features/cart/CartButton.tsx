@@ -18,7 +18,7 @@ const CartButton = ({ productID }: { productID: number }) => {
         </View>
       ) : (
         <View style={[styles.cartButton, styles.addButtonColor]}>
-          <Text style={styles.cartText}> Add to Cart</Text>
+          <Text style={styles.cartText}>Add to Cart</Text>
         </View>
       )}
     </Pressable>
@@ -32,10 +32,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     width: '100%',
-    height: 35
+    borderRadius: 50,
+    padding: 5,
+    height: 45
   },
   removeButtonColor: {
-    backgroundColor: '#b4c6db'
+    // backgroundColor: '#b4c6db'
+    backgroundColor: 'grey'
   },
   addButtonColor: {
     backgroundColor: '#5297eb'
