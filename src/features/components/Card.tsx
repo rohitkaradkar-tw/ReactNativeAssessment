@@ -35,10 +35,11 @@ export const Card = ({ product }: { product: ProductType }) => {
 
 const styles = StyleSheet.create({
   card: {
-    padding: 15,
-    width: 180,
+    padding: 20,
+    width: 160,
     borderRadius: 20,
-    gap: 10
+    gap: 10,
+    position: 'relative'
   },
   imgBox: {
     alignItems: 'center',

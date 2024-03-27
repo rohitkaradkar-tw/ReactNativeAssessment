@@ -1,10 +1,11 @@
-import { Text, View } from 'react-native';
 import React from 'react';
+import { Text } from 'react-native';
+import { Screen } from '../components/Screen';
 
 export default function Cart() {
   return (
-    <View>
+    <Screen>
       <Text>Cart</Text>
-    </View>
+    </Screen>
   );
 }
