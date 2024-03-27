@@ -1,12 +1,15 @@
 import { useTheme } from '@react-navigation/native';
 import React from 'react';
-import { View, Image, Text, StyleSheet } from 'react-native';
-
+import { View, Image, Text, StyleSheet, Button } from 'react-native';
 import { ProductType } from '../models/Product';
 import { WishListIcon } from '../wishlist/WishListIcon';
 
 export const Card = ({ product }: { product: ProductType }) => {
   const { colors } = useTheme();
+
+  const handleClick = () => {
+    return;
+  };
 
   return (
     <View style={[styles.card, { backgroundColor: colors.card }]}>
@@ -31,6 +34,9 @@ export const Card = ({ product }: { product: ProductType }) => {
         <Text style={{ color: colors.text }}>
           ratings : {product.rating.rate}
         </Text>
+      </View>
+      <View style={styles.cartButton}>
+        <Button title="Add to Cart" onPress={handleClick} />
       </View>
     </View>
   );
@@ -62,5 +68,9 @@ const styles = StyleSheet.create({
   },
   metaData: {
     alignItems: 'center'
+  },
+  cartButton: {
+    alignItems: 'center',
+    marginTop: 10
   }
 });
