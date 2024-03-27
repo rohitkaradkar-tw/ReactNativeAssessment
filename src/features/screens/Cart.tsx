@@ -1,11 +1,35 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { FlatList, StyleSheet } from 'react-native';
 import { Screen } from '../components/Screen';
+import { useStoreData } from '../../datastore/DataStoreProvider';
+import { CompactCard } from '../components/CompactCard';
 
-export default function Cart() {
+const Cart = () => {
+  const { getCartList } = useStoreData();
+
   return (
     <Screen>
-      <Text>Cart</Text>
+      <FlatList
+        data={getCartList()}
+        renderItem={cartListEntry => 
+          <CompactCard product={cartListEntry.item} />
+        }
+        keyExtractor={item => item.id.toString()}
+        contentContainerStyle={styles.container}
+        style={styles.list}
+      />
     </Screen>
   );
-}
+};
+
+export default Cart;
+
+const styles = StyleSheet.create({
+  container: {
+    rowGap: 10,
+    margin: 20
+  },
+  list: {
+    width: '100%'
+  }
+});
