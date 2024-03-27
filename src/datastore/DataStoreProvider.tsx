@@ -9,6 +9,7 @@ interface DataStoreContextProps {
   isWishlisted: (selectedId: number) => boolean;
   toggleCartItems: (selectedId: number) => void;
   getCartList: () => ProductType[];
+  isInCart: (selectedId: number) => boolean;
 }
 
 const noOp = () => {};
@@ -19,7 +20,8 @@ const DataStoreContext = createContext<DataStoreContextProps>({
   getWishList: () => [],
   isWishlisted: () => false,
   toggleCartItems: noOp,
-  getCartList: () => []
+  getCartList: () => [],
+  isInCart: () => false
 });
 
 export const useStoreData = () => {
@@ -54,6 +56,7 @@ export const DataStoreProvider = ({ children }: any) => {
 
   //Cart Items related operations
   const getCartList = () => data.filter(product => cartListIDs.has(product.id));
+  const isInCart = (productID: number) => cartListIDs.has(productID);
   const toggleCartItems = (selectedID: number) => {
     const cart = new Set<number>([...cartListIDs]);
 
@@ -79,7 +82,8 @@ export const DataStoreProvider = ({ children }: any) => {
         getWishList,
         isWishlisted,
         toggleCartItems,
-        getCartList
+        getCartList,
+        isInCart
       }}>
       {children}
     </DataStoreContext.Provider>
