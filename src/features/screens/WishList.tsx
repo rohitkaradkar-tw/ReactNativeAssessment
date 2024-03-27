@@ -6,12 +6,12 @@ import { FlatList, StyleSheet } from 'react-native';
 import { CompactCard } from '../components/CompactCard';
 
 export const WishList = () => {
-  const { data } = useStoreData();
+  const { getWishList } = useStoreData();
 
   return (
     <Screen>
       <FlatList
-        data={data}
+        data={getWishList()}
         renderItem={wishlistEntry => (
           <CompactCard product={wishlistEntry.item} />
         )}

@@ -1,13 +1,16 @@
 import { useTheme } from '@react-navigation/native';
 import React from 'react';
 import { View, Image, Text, StyleSheet } from 'react-native';
+
 import { ProductType } from '../models/Product';
+import { WishListIcon } from '../wishlist/WishListIcon';
 
 export const Card = ({ product }: { product: ProductType }) => {
   const { colors } = useTheme();
 
   return (
     <View style={[styles.card, { backgroundColor: colors.card }]}>
+      <WishListIcon productID={product.id} />
       <View style={styles.imgBox}>
         <Image
           source={{ uri: product.image }}
@@ -35,7 +38,7 @@ export const Card = ({ product }: { product: ProductType }) => {
 
 const styles = StyleSheet.create({
   card: {
-    padding: 20,
+    padding: 25,
     width: 160,
     borderRadius: 20,
     gap: 10,
