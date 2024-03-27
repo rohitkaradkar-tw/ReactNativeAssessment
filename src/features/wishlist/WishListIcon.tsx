@@ -1,11 +1,17 @@
 import React from 'react';
-import { Image, Pressable, StyleSheet, View } from 'react-native';
+import { Image, Pressable, StyleSheet, View, ViewStyle } from 'react-native';
 import { useStoreData } from '../../datastore/DataStoreProvider';
 
 const selectedHeartIcon = '../../../assets/images/heartSelected.png';
 const unSelectedHeartIcon = '../../../assets/images/wishlist.png';
 
-export const WishListIcon = ({ productID }: { productID: number }) => {
+export const WishListIcon = ({
+  productID,
+  containerStyle
+}: {
+  productID: number;
+  containerStyle?: ViewStyle;
+}) => {
   const { isWishlisted, toggleWishStatus } = useStoreData();
 
   return (
@@ -13,7 +19,7 @@ export const WishListIcon = ({ productID }: { productID: number }) => {
       onPress={() => {
         toggleWishStatus(productID);
       }}
-      style={styles.iconButton}>
+      style={[styles.iconButton, containerStyle]}>
       {isWishlisted(productID) ? (
         <Image
           source={require(selectedHeartIcon)}
