@@ -3,6 +3,7 @@ import { useTheme } from '@react-navigation/native';
 import { Image, StyleSheet, Text, View } from 'react-native';
 
 import { ProductType } from '../models/Product';
+import { WishListIcon } from '../wishlist/WishListIcon';
 
 export const CompactCard = ({ product }: { product: ProductType }) => {
   const { colors } = useTheme();
@@ -25,6 +26,7 @@ export const CompactCard = ({ product }: { product: ProductType }) => {
         </Text>
         <Text style={{ color: colors.text }}>₹ {product.price}</Text>
       </View>
+      <WishListIcon productID={product.id} containerStyle={styles.wishList} />
     </View>
   );
 };
@@ -36,7 +38,9 @@ const styles = StyleSheet.create({
     height: 120,
     width: '100%',
     borderRadius: 20,
-    gap: 5
+    gap: 5,
+    alignItems: 'center',
+    justifyContent: 'space-between'
   },
   imgBox: {
     alignItems: 'center',
@@ -54,5 +58,10 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 18,
     fontWeight: 'bold'
+  },
+  wishList: {
+    position: 'relative',
+    top: 0,
+    right: 0
   }
 });
