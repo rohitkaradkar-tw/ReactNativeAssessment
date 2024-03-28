@@ -1,11 +1,17 @@
 import React from 'react';
-import { ActivityIndicator, FlatList, StyleSheet } from 'react-native';
+import {
+  ActivityIndicator,
+  FlatList,
+  StyleSheet,
+  View,
+  Text
+} from 'react-native';
 import { Card } from '../components/Card';
 import { useStoreData } from '../../datastore/DataStoreProvider';
 import { Screen } from '../components/Screen';
 
 export const Home = () => {
-  const { data } = useStoreData();
+  const { data, userName } = useStoreData();
 
   if (data.length < 1) {
     return (
@@ -17,6 +23,9 @@ export const Home = () => {
 
   return (
     <Screen>
+      <View>
+        <Text>Hey, {userName}</Text>
+      </View>
       <FlatList
         data={data}
         renderItem={responseItem => <Card product={responseItem.item} />}

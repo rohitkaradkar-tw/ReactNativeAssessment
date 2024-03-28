@@ -1,9 +1,11 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { ProductType } from '../features/models/Product';
 import { fetchProducts } from '../service/APIService';
+import { getUserName } from '../service/store';
 
 interface DataStoreContextProps {
   data: ProductType[];
+  userName: string | null;
   toggleWishStatus: (selectedId: number) => void;
   getWishList: () => ProductType[];
   isWishlisted: (selectedId: number) => boolean;
@@ -18,6 +20,7 @@ const noOp = () => {};
 
 const DataStoreContext = createContext<DataStoreContextProps>({
   data: [],
+  userName: '',
   toggleWishStatus: noOp,
   getWishList: () => [],
   isWishlisted: () => false,
@@ -39,6 +42,7 @@ export const useStoreData = () => {
 
 export const DataStoreProvider = ({ children }: any) => {
   const [data, setData] = useState<ProductType[]>([]);
+  const [userName, setUserName] = useState<string | null>('');
   const [wishlistIDs, setWishListIDs] = useState<Set<number>>(new Set());
   const [cartListIDs, setCartListIDs] = useState<Set<number>>(new Set());
 
@@ -85,12 +89,14 @@ export const DataStoreProvider = ({ children }: any) => {
 
   useEffect(() => {
     fetchProducts().then(responseJson => setData(responseJson));
-  }, []);
+    getUserName().then(responseJson => setUserName(responseJson));
+  }, [userName]);
 
   return (
     <DataStoreContext.Provider
       value={{
         data,
+        userName,
         toggleWishStatus,
         getWishList,
         isWishlisted,
