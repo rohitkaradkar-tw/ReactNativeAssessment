@@ -31,7 +31,7 @@ const CartCard = ({
         </Text>
         <Text style={{ color: colors.text }}>₹ {product.price}</Text>
       </View>
-      <View>
+      <View style={styles.container}>
         <Pressable
           onPress={() => {
             if (quantity <= 1) {
@@ -39,16 +39,18 @@ const CartCard = ({
             }
             setQuantity(quantity - 1);
             handleBill(-product.price);
-          }}>
-          <Text>-</Text>
+          }}
+          style={styles.pressRemove}>
+          <Text style={styles.add}>-</Text>
         </Pressable>
         <Text>{quantity}</Text>
         <Pressable
           onPress={() => {
             setQuantity(quantity + 1);
             handleBill(product.price);
-          }}>
-          <Text>+</Text>
+          }}
+          style={styles.pressAdd}>
+          <Text style={styles.add}>+</Text>
         </Pressable>
       </View>
     </View>
@@ -84,9 +86,26 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold'
   },
-  wishList: {
-    position: 'relative',
-    top: 0,
-    right: 0
+  add: {
+    color: 'black',
+    fontSize: 20
+  },
+  pressAdd: {
+    backgroundColor: '#5fb4e8',
+    borderRadius: 50,
+    width: '30%',
+    alignItems: 'center',
+    marginTop: 4
+  },
+  pressRemove: {
+    backgroundColor: '#e1e3e1',
+    borderRadius: 50,
+    width: '30%',
+    alignItems: 'center',
+    marginBottom: 4
+  },
+  container: {
+    width: '30%',
+    alignItems: 'center'
   }
 });
