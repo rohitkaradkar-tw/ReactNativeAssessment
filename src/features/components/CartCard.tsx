@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, Pressable, Image, StyleSheet } from 'react-native';
 import { ProductType } from '../models/Product';
 import { useTheme } from '@react-navigation/native';
+import { useStoreData } from '../../datastore/DataStoreProvider';
 
 const CartCard = ({
   product,
@@ -12,6 +13,7 @@ const CartCard = ({
 }) => {
   const { colors } = useTheme();
   const [quantity, setQuantity] = useState(1);
+  const { toggleCartItems } = useStoreData();
 
   return (
     <View style={[styles.card, { backgroundColor: colors.card }]}>
@@ -35,7 +37,7 @@ const CartCard = ({
         <Pressable
           onPress={() => {
             if (quantity <= 1) {
-              return;
+              toggleCartItems(product.id);
             }
             setQuantity(quantity - 1);
             handleBill(-product.price);
