@@ -7,5 +7,5 @@ export const TabScreens = {
   HOME: 'Home',
   CART: 'Cart',
   WISHLIST: 'Wishlist',
-  SETTING: 'Setting'
+  SETTING: 'Settings'
 } as const;
