@@ -1,12 +1,17 @@
-import { useTheme } from '@react-navigation/native';
-import React from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
-
+import React, { useState } from 'react';
+import { View, Text, Pressable, Image, StyleSheet } from 'react-native';
 import { ProductType } from '../models/Product';
-import { WishListIcon } from '../wishlist/WishListIcon';
+import { useTheme } from '@react-navigation/native';
 
-export const CompactCard = ({ product }: { product: ProductType }) => {
+const CartCard = ({
+  product,
+  handleBill
+}: {
+  product: ProductType;
+  handleBill: (price: number) => void;
+}) => {
   const { colors } = useTheme();
+  const [quantity, setQuantity] = useState(1);
 
   return (
     <View style={[styles.card, { backgroundColor: colors.card }]}>
@@ -26,10 +31,30 @@ export const CompactCard = ({ product }: { product: ProductType }) => {
         </Text>
         <Text style={{ color: colors.text }}>₹ {product.price}</Text>
       </View>
-      <WishListIcon productID={product.id} containerStyle={styles.wishList} />
+      <View>
+        <Pressable
+          onPress={() => {
+            if (quantity <= 1) {
+              return;
+            }
+            setQuantity(quantity - 1);
+            handleBill(-product.price);
+          }}>
+          <Text>-</Text>
+        </Pressable>
+        <Text>{quantity}</Text>
+        <Pressable
+          onPress={() => {
+            setQuantity(quantity + 1);
+            handleBill(product.price);
+          }}>
+          <Text>+</Text>
+        </Pressable>
+      </View>
     </View>
   );
 };
+export default CartCard;
 
 const styles = StyleSheet.create({
   card: {

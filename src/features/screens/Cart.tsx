@@ -1,23 +1,31 @@
-import React from 'react';
-import { FlatList, StyleSheet } from 'react-native';
-import { Screen } from '../components/Screen';
+import React, { useState } from 'react';
+import { FlatList, StyleSheet, View, Text } from 'react-native';
 import { useStoreData } from '../../datastore/DataStoreProvider';
-import { CompactCard } from '../components/CompactCard';
+import CartCard from '../components/CartCard';
+import { Screen } from '../components/Screen';
 
 const Cart = () => {
-  const { getCartList } = useStoreData();
+  const { getCartList, getBill } = useStoreData();
+  const [totalBill, getTotalBill] = useState(getBill());
+
+  const handleBill = (price: number) => {
+    getTotalBill(totalBill + price);
+  };
 
   return (
     <Screen>
       <FlatList
         data={getCartList()}
-        renderItem={cartListEntry => 
-          <CompactCard product={cartListEntry.item} />
-        }
+        renderItem={cartListEntry => (
+          <CartCard product={cartListEntry.item} handleBill={handleBill} />
+        )}
         keyExtractor={item => item.id.toString()}
         contentContainerStyle={styles.container}
         style={styles.list}
       />
+      <View>
+        <Text> ₹ {totalBill} </Text>
+      </View>
     </Screen>
   );
 };
