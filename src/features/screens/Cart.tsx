@@ -1,16 +1,30 @@
 import React, { useState } from 'react';
-import { FlatList, StyleSheet } from 'react-native';
+import { FlatList, StyleSheet, Alert } from 'react-native';
 import { useStoreData } from '../../datastore/DataStoreProvider';
 import CartCard from '../components/CartCard';
 import { Screen } from '../components/Screen';
 import Bill from '../components/Bill';
 
 const Cart = () => {
-  const { getCartList, getBill } = useStoreData();
-  const [totalBill, getTotalBill] = useState(getBill());
+  const { getCartList, getBill, clearCart } = useStoreData();
+  const [totalBill, setTotalBill] = useState(getBill());
 
   const handleBill = (price: number) => {
-    getTotalBill(totalBill + price);
+    setTotalBill(totalBill + price);
+  };
+
+  const placingOrder = () => {
+    if (totalBill) {
+      Alert.alert('Order', 'Order Placed', [
+        {
+          text: 'Ok',
+          onPress: () => {
+            clearCart();
+            setTotalBill(0);
+          }
+        }
+      ]);
+    }
   };
 
   return (
@@ -24,7 +38,7 @@ const Cart = () => {
         contentContainerStyle={styles.container}
         style={styles.list}
       />
-      <Bill totalBill={totalBill} />
+      <Bill totalBill={totalBill} placingOrder={placingOrder} />
     </Screen>
   );
 };

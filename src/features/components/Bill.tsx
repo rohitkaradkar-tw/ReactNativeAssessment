@@ -1,15 +1,21 @@
 import React from 'react';
 import { View, Text, Pressable, StyleSheet } from 'react-native';
 
-const Bill = ({ totalBill }: { totalBill: Number }) => {
+const Bill = ({
+  totalBill,
+  placingOrder
+}: {
+  totalBill: Number;
+  placingOrder: () => void;
+}) => {
   return (
     <View style={styles.billContainer}>
       <Text style={styles.bill}> ₹ {totalBill.toFixed(2)} </Text>
-      <View style={styles.checkOutContainer}>
-        <Pressable>
-          <Text style={styles.checkout}> --{'>'} Check Out</Text>
-        </Pressable>
-      </View>
+      <Pressable
+        onPress={() => placingOrder()}
+        style={styles.checkOutContainer}>
+        <Text style={styles.checkout}> --{'>'} Check Out</Text>
+      </Pressable>
     </View>
   );
 };
