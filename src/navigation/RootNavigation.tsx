@@ -6,19 +6,23 @@ import { useThemeContext } from '../theme/AppTheme';
 import { StackScreens } from './Screens';
 import { ScreenNavigator } from './ScreenNavigation';
 import { InputNameScreen } from '../features/welcome/InputNameScreen';
+import { useStoreData } from '../datastore/DataStoreProvider';
 
 const RootStack = createNativeStackNavigator();
 
 export const RootNavigation = () => {
   const { theme } = useThemeContext();
+  const { userName } = useStoreData();
 
   return (
     <NavigationContainer theme={theme}>
       <RootStack.Navigator screenOptions={{ headerShown: false }}>
-        <RootStack.Screen
-          name={StackScreens.WELCOME}
-          component={InputNameScreen}
-        />
+        {userName ? (
+          <RootStack.Screen
+            name={StackScreens.WELCOME}
+            component={InputNameScreen}
+          />
+        ) : null}
         <RootStack.Screen
           name={StackScreens.CONTENT}
           component={ScreenNavigator}

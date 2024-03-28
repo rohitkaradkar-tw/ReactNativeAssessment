@@ -1,51 +1,58 @@
 import { useTheme } from '@react-navigation/native';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 
 import { StackScreens } from '../../navigation/Screens';
-import { getUserName, setUserName } from '../../service/store';
+import { setUserName } from '../../service/store';
 import { Screen } from '../components/Screen';
+import { useStoreData } from '../../datastore/DataStoreProvider';
 
 export const InputNameScreen = ({ navigation }: any) => {
   const { colors } = useTheme();
   const [name, setName] = useState('');
+  const { userName } = useStoreData();
 
-  useEffect(() => {
-    const getUserData = async () => {
-      try {
-        const storedName = await getUserName();
-        console.log('User Name: ' + storedName);
-        if (storedName) {
-          navigation.replace(StackScreens.CONTENT);
-        }
-      } catch (error) {
-        console.error('Error retrieving user data:', error);
-      }
-    };
+  // useEffect(() => {
+  //   const getUserData = async () => {
+  //     try {
+  //       const storedName = await getUserName();
+  //       console.log('User Name: ' + storedName);
+  //       if (storedName) {
+  //         setName(storedName);
+  //         navigation.push(StackScreens.CONTENT);
+  //       }
+  //     } catch (error) {
+  //       console.error('Error retrieving user data:', error);
+  //     }
+  //   };
 
-    getUserData();
-  }, [navigation]);
+  //   getUserData();
+  // });
 
   const handleSubmit = () => {
-    if (name.length >= 3) {
-      setUserName(name);
-      navigation.navigate(StackScreens.CONTENT);
-    }
+    setUserName(name);
+    navigation.navigate(StackScreens.CONTENT);
   };
 
   return (
     <Screen>
-      <View style={styles.titleBox}>
-        <Text style={[styles.title, { color: colors.text }]}>Welcome</Text>
-      </View>
-      <View style={styles.container}>
-        <TextInput
-          style={[styles.textInput, { color: colors.text }]}
-          onChangeText={setName}
-          onSubmitEditing={handleSubmit}
-          placeholder="How should we call you ...?"
-        />
-      </View>
+      {userName ? (
+        navigation.replace(StackScreens.CONTENT)
+      ) : (
+        <>
+          <View style={styles.titleBox}>
+            <Text style={[styles.title, { color: colors.text }]}>Welcome</Text>
+          </View>
+          <View style={styles.container}>
+            <TextInput
+              style={[styles.textInput, { color: colors.text }]}
+              onChangeText={setName}
+              onSubmitEditing={handleSubmit}
+              placeholder="How should we call you ...?"
+            />
+          </View>
+        </>
+      )}
     </Screen>
   );
 };
