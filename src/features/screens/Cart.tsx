@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { FlatList, StyleSheet, View, Text, Pressable } from 'react-native';
+import { FlatList, StyleSheet } from 'react-native';
 import { useStoreData } from '../../datastore/DataStoreProvider';
 import CartCard from '../components/CartCard';
 import { Screen } from '../components/Screen';
+import Bill from '../components/Bill';
 
 const Cart = () => {
   const { getCartList, getBill } = useStoreData();
@@ -23,14 +24,7 @@ const Cart = () => {
         contentContainerStyle={styles.container}
         style={styles.list}
       />
-      <View style={styles.billContainer}>
-        <Text style={styles.bill}> ₹ {totalBill.toFixed(2)} </Text>
-        <View style={styles.checkOutContainer}>
-          <Pressable>
-            <Text style={styles.checkout}> --{'>'} Check Out</Text>
-          </Pressable>
-        </View>
-      </View>
+      <Bill totalBill={totalBill} />
     </Screen>
   );
 };
@@ -44,27 +38,5 @@ const styles = StyleSheet.create({
   },
   list: {
     width: '100%'
-  },
-  billContainer: {
-    flexDirection: 'row',
-    width: '97%',
-    padding: 15,
-    borderRadius: 15,
-    backgroundColor: 'white',
-    justifyContent: 'space-between'
-  },
-  bill: {
-    color: 'black',
-    fontSize: 30
-  },
-  checkOutContainer: {
-    backgroundColor: '#033e9c',
-    width: '35%',
-    borderRadius: 25,
-    alignItems: 'center',
-    padding: 10
-  },
-  checkout: {
-    color: '#5fb4e8'
   }
 });
