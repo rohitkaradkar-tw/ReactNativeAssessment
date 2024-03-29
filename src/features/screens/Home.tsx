@@ -23,8 +23,8 @@ export const Home = () => {
 
   return (
     <Screen>
-      <View>
-        <Text>Hey, {userName}</Text>
+      <View style={styles.titleBox}>
+        <Text style={styles.title}>Welcome {userName}</Text>
       </View>
       <FlatList
         data={data}
@@ -44,6 +44,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     gap: 20,
     padding: 15
+  },
+  titleBox: {
+    height: 30,
+    marginTop: 20
+  },
+  title: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    textAlign: 'center'
   },
   box: {}
 });

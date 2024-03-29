@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   StyleSheet,
   Switch,
@@ -12,30 +12,16 @@ import { Button } from 'react-native-paper';
 import { useTheme } from '@react-navigation/native';
 
 import { useThemeContext } from '../../theme/AppTheme';
-import { getUserName, setUserName } from '../../service/store';
+//import { getUserName, setUserName } from '../../service/store';
 import { Divider } from 'react-native-paper';
+import { useStoreData } from '../../datastore/DataStoreProvider';
 
 export default function Settings() {
   const [switchState, setSwitchState] = useState(false);
   const { toggleTheme } = useThemeContext();
   const { colors } = useTheme();
-  const [name, setName] = useState('');
-
-  useEffect(() => {
-    const getUserData = async () => {
-      try {
-        const storedName = await getUserName();
-        console.log('User Name: ' + storedName);
-        if (storedName) {
-          setName(storedName);
-        }
-      } catch (error) {
-        console.error('Error retrieving user data:', error);
-      }
-    };
-
-    getUserData();
-  }, []);
+  const { userName, updateUserName } = useStoreData();
+  const [name, setName] = useState(userName);
 
   const toggleSwitch = () => {
     toggleTheme();
@@ -44,7 +30,7 @@ export default function Settings() {
 
   const saveUserName = () => {
     console.log('Save user name: ' + name);
-    setUserName(name);
+    updateUserName(name);
     Alert.alert('App', 'Name updated successfully', [
       {
         text: 'Close',
@@ -69,7 +55,6 @@ export default function Settings() {
           />
           <Pressable
             onPress={() => {
-              console.log('on button press');
               saveUserName();
             }}>
             <Button style={styles.buttonStyles}>Edit</Button>

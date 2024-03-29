@@ -13,7 +13,7 @@ const RootStack = createNativeStackNavigator();
 export const RootNavigation = () => {
   const { theme } = useThemeContext();
   const { userName } = useStoreData();
-  console.log('Root username: ' + userName);
+
   return (
     <NavigationContainer theme={theme}>
       <RootStack.Navigator screenOptions={{ headerShown: false }}>
