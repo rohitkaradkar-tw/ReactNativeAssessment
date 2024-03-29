@@ -1,11 +1,12 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { ProductType } from '../features/models/Product';
 import { fetchProducts } from '../service/APIService';
-import { getUserName } from '../service/store';
+import { getUserName, setUserName } from '../service/store';
 
 interface DataStoreContextProps {
   data: ProductType[];
   userName: string | null;
+  updateUserName: (user: string) => void;
   toggleWishStatus: (selectedId: number) => void;
   getWishList: () => ProductType[];
   isWishlisted: (selectedId: number) => boolean;
@@ -21,6 +22,7 @@ const noOp = () => {};
 const DataStoreContext = createContext<DataStoreContextProps>({
   data: [],
   userName: '',
+  updateUserName: noOp,
   toggleWishStatus: noOp,
   getWishList: () => [],
   isWishlisted: () => false,
@@ -42,9 +44,14 @@ export const useStoreData = () => {
 
 export const DataStoreProvider = ({ children }: any) => {
   const [data, setData] = useState<ProductType[]>([]);
-  const [userName, setUserName] = useState<string | null>('');
+  const [user, setUser] = useState<string | null>('');
   const [wishlistIDs, setWishListIDs] = useState<Set<number>>(new Set());
   const [cartListIDs, setCartListIDs] = useState<Set<number>>(new Set());
+
+  const updateUserName = (user: string) => {
+    setUserName(user);
+    setUser(user);
+  };
 
   // Wishlist related operations
   const isWishlisted = (productID: number) => wishlistIDs.has(productID);
@@ -89,14 +96,15 @@ export const DataStoreProvider = ({ children }: any) => {
 
   useEffect(() => {
     fetchProducts().then(responseJson => setData(responseJson));
-    getUserName().then(responseJson => setUserName(responseJson));
-  }, [userName]);
+    getUserName().then(responseJson => setUser(responseJson));
+  }, [user]);
 
   return (
     <DataStoreContext.Provider
       value={{
         data,
-        userName,
+        userName: user,
+        updateUserName,
         toggleWishStatus,
         getWishList,
         isWishlisted,

@@ -17,12 +17,12 @@ export const RootNavigation = () => {
   return (
     <NavigationContainer theme={theme}>
       <RootStack.Navigator screenOptions={{ headerShown: false }}>
-        {userName ? (
+        {userName ? null : (
           <RootStack.Screen
             name={StackScreens.WELCOME}
             component={InputNameScreen}
           />
-        ) : null}
+        )}
         <RootStack.Screen
           name={StackScreens.CONTENT}
           component={ScreenNavigator}
