@@ -13,16 +13,16 @@ const RootStack = createNativeStackNavigator();
 export const RootNavigation = () => {
   const { theme } = useThemeContext();
   const { userName } = useStoreData();
-
+  console.log('Root username: ' + userName);
   return (
     <NavigationContainer theme={theme}>
       <RootStack.Navigator screenOptions={{ headerShown: false }}>
-        {userName ? (
+        {userName ? null : (
           <RootStack.Screen
             name={StackScreens.WELCOME}
             component={InputNameScreen}
           />
-        ) : null}
+        )}
         <RootStack.Screen
           name={StackScreens.CONTENT}
           component={ScreenNavigator}
